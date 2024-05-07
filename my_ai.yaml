@@ -5,7 +5,6 @@ payload:
   - DOMAIN-SUFFIX,homedepot.com
   - DOMAIN-SUFFIX,google.com
   - DOMAIN-SUFFIX,googleapis.com
-  - DOMAIN-SUFFIX,irs.gov
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,azure.com
