@@ -1,0 +1,221 @@
+parsers: # array
+  - reg: ^.*$
+  # 删除服务商提供的策略组和规则
+    code: |
+      module.exports.parse = (raw, { yaml }) => {
+        const rawObj = yaml.parse(raw)
+        const groups = []
+        const rules = []
+        return yaml.stringify({ ...rawObj, 'proxy-groups': groups, rules })
+      } 
+
+    yaml:
+      prepend-proxy-groups:
+        - name: PROXY
+          type: select
+          proxies:
+            - URL-TEST
+#            - LOAD-BALANCE
+            - SELECT
+            - DIRECT
+
+        - name: OTHER
+          type: select
+          proxies:
+            - PROXY
+            - DIRECT
+            
+        - name: AD
+          type: select
+          proxies:
+            - REJECT
+            - DIRECT
+            - PROXY
+               
+        - name: URL-TEST
+          type: url-test
+          url: http://www.gstatic.com/generate_204
+          interval: 600
+          lazy: true
+          tolerance: 100
+                  
+#        - name: LOAD-BALANCE
+#          type: load-balance
+#          url: http://www.gstatic.com/generate_204
+#          interval: 600
+         
+        - name: Stable
+          type: url-test
+          url: http://www.google.com/generate_204
+          interval: 300
+
+        - name: 日本
+          type: url-test
+          url: http://www.google.com/generate_204
+          interval: 300
+        
+#        - name: 新加坡
+#          type: url-test
+#          url: http://www.google.com/generate_204
+#          interval: 300
+        
+        - name: 美国
+          type: select
+          url: http://www.google.com/generate_204
+          interval: 300
+
+        - name: 🤖OpenAI
+          type: select
+          proxies:
+          - 日本
+          - 美国
+
+        - name: SELECT
+          type: select
+          
+      commands:
+        - proxy-groups.(URL-TEST).proxies=[]proxyNames|^(?!.*x12\.8)(?!.*x5\.88)(?!.*UID)(?!.*EMAIL).*$
+#        - proxy-groups.(LOAD-BALANCE).proxies=[]proxyNames
+        - proxy-groups.(SELECT).proxies=[]proxyNames|^(?!.*x12\.8)(?!.*UID)(?!.*EMAIL).*$
+#        - proxy-groups.香港.proxies=[]proxyNames|港|香港|🇭🇰|HK|Hong Kong
+        - proxy-groups.Stable.proxies=[]proxyNames|x12.8
+        - proxy-groups.日本.proxies=[]proxyNames|日|日本|🇯🇵|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan
+#        - proxy-groups.新加坡.proxies=[]proxyNames|新加坡|🇸🇬|坡|狮城|SG|Singapore
+        - proxy-groups.美国.proxies=[]proxyNames|美|美国|🇺🇸|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
+        - mixed-port=7890
+        # 一些可能用到的正则式
+        # []proxyNames|a                         # 包含a
+        # []proxyNames|^(.*)(a|b)+(.*)$          # 包含a或b
+        # []proxyNames|^(?=.*a)(?=.*b).*$        # 包含a和b
+        # []proxyNames|^((?!b).)*a((?!b).)*$     # 包含a且不包含b
+        # []proxyNames|^((?!b|c).)*a((?!b|c).)*$ # 包含a且不包含b或c
+
+       # 为各个策略组添加一个DIRECT，避免机场节点无法匹配上面的正则筛选而导致配置出错。应该有其他办法避免，但是我不会。
+       # - proxy-groups.香港.proxies.0+REJECT
+
+
+      prepend-rules:
+   #     - RULE-SET,applications,DIRECT
+        - RULE-SET,my_cn,DIRECT
+        - DOMAIN-SUFFIX,gigabyte.com,PROXY
+        - DOMAIN-SUFFIX,agoda.com,PROXY
+        - DOMAIN-SUFFIX,klook.com,PROXY
+        - PROCESS-NAME,IDMan.exe,DIRECT
+        - PROCESS-NAME,Diablo IV.exe,Stable
+#        - DOMAIN-SUFFIX,us.actual.battle.net,Stable
+        - RULE-SET,my_ai,🤖OpenAI
+        - RULE-SET,us_only,美国
+        - RULE-SET,private,DIRECT
+        - RULE-SET,reject,AD
+#        - RULE-SET,icloud,DIRECT #
+        - RULE-SET,apple,DIRECT # 这三个为国内可直连地址，如果希望走代理改为PROXY
+
+        - RULE-SET,gfw,PROXY
+        - RULE-SET,telegramcidr,PROXY
+        - RULE-SET,lancidr,DIRECT
+#        - RULE-SET,cncidr,DIRECT
+        - GEOIP,CN,DIRECT
+#        - RULE-SET,direct,DIRECT
+        - RULE-SET,proxy,OTHER
+        - MATCH,OTHER # 规则之外的
+
+      mix-proxy-providers:
+      mix-rule-providers: 
+        my_ai:
+          type: http
+          behavior: classical
+          url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_ai.yaml"
+          path: ./ruleset/my_ai.yaml
+          interval: 86400
+
+        my_cn:
+          type: http
+          behavior: domain
+          url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_cn.yaml"
+          path: ./ruleset/my_cn.yaml
+          interval: 86400
+
+        reject: # 广告域名列表
+          type: http
+          behavior: domain
+          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+          path: ./ruleset/reject.yaml
+          interval: 86400
+          
+#        icloud: # iCloud 域名列表
+#          type: http
+#          behavior: domain
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"
+#          path: ./ruleset/icloud.yaml
+#          interval: 86400
+          
+        apple: # Apple 在中国大陆可直连的域名列表
+          type: http
+          behavior: domain
+          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+          path: ./ruleset/apple.yaml
+          interval: 86400
+
+        proxy: # 代理域名列表
+          type: http
+          behavior: domain
+          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+          path: ./ruleset/proxy.yaml
+          interval: 86400
+          
+#        direct: # 直连域名列表
+#          type: http
+#          behavior: domain
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+#          path: ./ruleset/direct.yaml
+#          interval: 86400
+          
+        private: # 私有网络专用域名列表
+          type: http
+          behavior: domain
+          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+          path: ./ruleset/private.yaml
+          interval: 86400
+          
+        gfw: # GFWList 域名列表
+          type: http
+          behavior: domain
+          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+          path: ./ruleset/gfw.yaml
+          interval: 86400
+        
+        us_only: # 非中国大陆使用的顶级域名列表
+          type: http
+          behavior: domain
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+          url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_us.yaml"
+          path: ./ruleset/my_us.yaml
+          interval: 86400
+          
+        telegramcidr: # Telegram 使用的 IP 地址列表
+          type: http
+          behavior: ipcidr
+          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+          path: ./ruleset/telegramcidr.yaml
+          interval: 86400
+          
+#        cncidr: # 中国大陆 IP 地址列表
+#          type: http
+#          behavior: ipcidr
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+#          path: ./ruleset/cncidr.yaml
+#          interval: 86400
+          
+        lancidr: # 局域网 IP 及保留 IP 地址列表
+          type: http
+          behavior: ipcidr
+          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+          path: ./ruleset/lancidr.yaml
+          interval: 86400
+          
+#        applications: # 需要直连的常见软件列表
+#          type: http
+#          behavior: classical
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+#          path: ./ruleset/applications.yaml
+#          interval: 86400
