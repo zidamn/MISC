@@ -3,7 +3,6 @@ payload:
   - DOMAIN-SUFFIX,coze.com
   - DOMAIN-SUFFIX,bing.com
   - DOMAIN-SUFFIX,homedepot.com
-  - DOMAIN-SUFFIX,googleapis.com
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,azure.com
