@@ -9,12 +9,13 @@ payload:
   - '+.llnwd.net'
   - '+.cdn.blizzard.com'
   - '+.cloudflarestorage.com'
-  - '+.steamcontent.com'
   - '+.audio-ak-spotify-com.akamaized.net'
   - '+.spotify.com'
   - '+.spotifycdn.com'
   - '+.shimo.im'
-  - '+.steamstatic.com' #steam
+#Steam
+  - '+.steamcontent.com'
+  - '+.steamstatic.com'
 #Apple
   - '+.mzstatic.com'
   - '+.adcdownload.apple.com.akadns.net'
