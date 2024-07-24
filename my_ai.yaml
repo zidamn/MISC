@@ -11,7 +11,7 @@ payload:
   - DOMAIN-SUFFIX,synchrony.com
   - DOMAIN-SUFFIX,opus.pro
   - DOMAIN-SUFFIX,gemini.google.com
-  - DOMAIN-SUFFIX,.meta.ai
+  - DOMAIN-SUFFIX,meta.ai
 # REPO: https://github.com/blackmatrix7/ios_rule_script
   - DOMAIN,browser-intake-datadoghq.com
   - DOMAIN,static.cloudflareinsights.com
