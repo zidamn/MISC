@@ -13,6 +13,7 @@ payload:
   - '+.spotify.com'
   - '+.spotifycdn.com'
   - '+.shimo.im'
+  - '+.p.sda1.dev'
 #Steam
   - '+.steamcontent.com'
   - '+.steamstatic.com'
