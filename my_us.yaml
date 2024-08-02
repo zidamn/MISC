@@ -1,5 +1,6 @@
 payload:
   - '+.gov'
+  - '+.mil'  
   - '+.google.com'
   - '+.googleapis.com'
   - '+.usvisascheduling.com'
