@@ -14,6 +14,7 @@ payload:
   - '+.spotifycdn.com'
   - '+.shimo.im'
   - '+.p.sda1.dev'
+  - '+.gofile.io'
 #Steam
   - '+.steamcontent.com'
   - '+.steamstatic.com'
