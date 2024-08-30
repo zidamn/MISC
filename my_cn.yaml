@@ -18,6 +18,8 @@ payload:
 #Steam
   - '+.steamcontent.com'
   - '+.steamstatic.com'
+  - '+.cm.steampowered.com'
+  - '+.steamserver.net'
 
 #lancidr
   - '0.0.0.0/8'
