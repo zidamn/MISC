@@ -17,6 +17,8 @@ payload:
   - '+.gofile.io'
   - '+.xiamenair.com'
   - '+.docker.com'
+  - '+.dlr1.fcdn.sk' #net disk
+  
 #Steam
   - '+.steamcontent.com'
   - '+.steamstatic.com'
