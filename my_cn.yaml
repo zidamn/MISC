@@ -19,7 +19,7 @@ payload:
   - '+.docker.com'
   - '+.dlr1.fcdn.sk' #net disk
   - '+.v.ddys.pro'
-  - '+.pqrst.vip' #online movie
+  #- '+.pqrst.vip' #online movie
   
 #Steam
   - '+.steamcontent.com'
