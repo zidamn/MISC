@@ -18,6 +18,7 @@ payload:
   - '+.xiamenair.com'
   - '+.docker.com'
   - '+.dlr1.fcdn.sk' #net disk
+  - '+.v.ddys.pro'
   
 #Steam
   - '+.steamcontent.com'
