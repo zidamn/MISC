@@ -1,8 +1,8 @@
 payload:
   - '+.gov'
-  - '+.mil'  
-  - '+.google.com'
-  - '+.googleapis.com'
+  - '+.mil'
+#  - '+.google.com'
+#  - '+.googleapis.com'
   - '+.usvisascheduling.com'
   - '+.lowes.com'
   - '+.id.me'
