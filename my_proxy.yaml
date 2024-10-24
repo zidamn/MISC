@@ -1,9 +1,10 @@
 payload:
   - '+.gigabyte.com'
   - '+.agoda.com'
-  - '+.klook.com'
+ # - '+.klook.com'
   - '+.gvt1-cn.com'
   - '+.community.akamai.steamstatic.com'
   - '+.open.spotify.com'
   - '+.apple-mapkit.com'
   - '+.podcasts.apple.com'
+  - '+.twitch.tv'
