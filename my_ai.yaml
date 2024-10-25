@@ -1,14 +1,17 @@
 payload:
   - DOMAIN-SUFFIX,bestbuy.com
+  - DOMAIN-SUFFIX,homedepot.com
+  - DOMAIN-SUFFIX,synchrony.com
+  
   - DOMAIN-SUFFIX,coze.com
   - DOMAIN-SUFFIX,bing.com
-  - DOMAIN-SUFFIX,homedepot.com
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
   - DOMAIN-SUFFIX,azure.com
   - DOMAIN-SUFFIX,google.dev
+  - DOMAIN-SUFFIX,google.com
   - DOMAIN-SUFFIX,googleusercontent.com
-  - DOMAIN-SUFFIX,synchrony.com
+
   - DOMAIN-SUFFIX,opus.pro
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,meta.ai
