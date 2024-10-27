@@ -11,7 +11,7 @@ payload:
   - DOMAIN-SUFFIX,google.dev
   - DOMAIN-SUFFIX,google.com
   - DOMAIN-SUFFIX,googleusercontent.com
-
+  - DOMAIN-SUFFIX,groq.com
   - DOMAIN-SUFFIX,opus.pro
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,meta.ai
