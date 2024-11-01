@@ -14,7 +14,7 @@ parsers: # array
         - name: PROXY
           type: select
           proxies:
-            - URL-TEST
+#            - URL-TEST
 #            - LOAD-BALANCE
             - SELECT
             - DIRECT
@@ -58,7 +58,7 @@ parsers: # array
 #          type: url-test
 #          url: http://www.google.com/generate_204
 #          interval: 300
-        
+
         - name: 美国
           type: select
           url: http://www.google.com/generate_204
@@ -72,12 +72,16 @@ parsers: # array
 
         - name: SELECT
           type: select
+          url: http://www.google.com/generate_204
+          interval: 300
+          lazy: true
+          tolerance: 1000
           
       commands:
         - proxy-groups.(URL-TEST).proxies=[]proxyNames|^(?!.*x12\.8)(?!.*x5\.88)(?!.*UID)(?!.*EMAIL).*$
 #        - proxy-groups.(LOAD-BALANCE).proxies=[]proxyNames
         - proxy-groups.(SELECT).proxies=[]proxyNames|^(?!.*x12\.8)(?!.*UID)(?!.*EMAIL).*$
-#        - proxy-groups.香港.proxies=[]proxyNames|港|香港|🇭🇰|HK|Hong Kong
+#        - proxy-groups.(No-HK).proxies=[]proxyNames|^(?!.*香港)(?!.*🇭🇰)(?!.*HK)(?!.*Hong Kong)(?!.*x12\.8)(?!.*x5\.88)(?!.*UID)(?!.*EMAIL).*$
         - proxy-groups.Stable.proxies=[]proxyNames|x12.8
         - proxy-groups.日本.proxies=[]proxyNames|日|日本|🇯🇵|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan
 #        - proxy-groups.新加坡.proxies=[]proxyNames|新加坡|🇸🇬|坡|狮城|SG|Singapore
@@ -96,27 +100,28 @@ parsers: # array
 
       prepend-rules:
    #     - RULE-SET,applications,DIRECT
+   #     - DOMAIN-SUFFIX,gigabyte.com,PROXY
+   #     - DOMAIN-SUFFIX,agoda.com,PROXY
+   #     - DOMAIN-SUFFIX,klook.com,PROXY
+   #     - DOMAIN-SUFFIX,gvt1-cn.com,PROXY
+   #     - DOMAIN-SUFFIX,community.akamai.steamstatic.com,PROXY
+   #     - DOMAIN-SUFFIX,open.spotify.com,PROXY
+   #     - PROCESS-NAME,IDMan.exe,DIRECT
+   #     - PROCESS-NAME,Diablo IV.exe,Stable
+        - RULE-SET,my_proxy,PROXY
         - RULE-SET,my_cn,DIRECT
-        - DOMAIN-SUFFIX,gigabyte.com,PROXY
-        - DOMAIN-SUFFIX,agoda.com,PROXY
-        - DOMAIN-SUFFIX,klook.com,PROXY
-        - PROCESS-NAME,IDMan.exe,DIRECT
-        - PROCESS-NAME,Diablo IV.exe,Stable
-#        - DOMAIN-SUFFIX,us.actual.battle.net,Stable
         - RULE-SET,my_ai,🤖OpenAI
         - RULE-SET,us_only,美国
         - RULE-SET,private,DIRECT
         - RULE-SET,reject,AD
 #        - RULE-SET,icloud,DIRECT #
-        - RULE-SET,apple,DIRECT # 这三个为国内可直连地址，如果希望走代理改为PROXY
-
-        - RULE-SET,gfw,PROXY
-        - RULE-SET,telegramcidr,PROXY
-        - RULE-SET,lancidr,DIRECT
+#        - RULE-SET,gfw,PROXY
+#        - RULE-SET,telegramcidr,PROXY
+#        - RULE-SET,lancidr,DIRECT
 #        - RULE-SET,cncidr,DIRECT
         - GEOIP,CN,DIRECT
 #        - RULE-SET,direct,DIRECT
-        - RULE-SET,proxy,OTHER
+#        - RULE-SET,proxy,OTHER
         - MATCH,OTHER # 规则之外的
 
       mix-proxy-providers:
@@ -126,6 +131,13 @@ parsers: # array
           behavior: classical
           url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_ai.yaml"
           path: ./ruleset/my_ai.yaml
+          interval: 86400
+
+        my_proxy:
+          type: http
+          behavior: domain
+          url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_proxy.yaml"
+          path: ./ruleset/my_proxy.yaml
           interval: 86400
 
         my_cn:
@@ -149,19 +161,12 @@ parsers: # array
 #          path: ./ruleset/icloud.yaml
 #          interval: 86400
           
-        apple: # Apple 在中国大陆可直连的域名列表
-          type: http
-          behavior: domain
-          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
-          path: ./ruleset/apple.yaml
-          interval: 86400
-
-        proxy: # 代理域名列表
-          type: http
-          behavior: domain
-          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
-          path: ./ruleset/proxy.yaml
-          interval: 86400
+#        proxy: # 代理域名列表
+#          type: http
+#          behavior: domain
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/proxy.txt"
+#          path: ./ruleset/proxy.yaml
+#          interval: 86400
           
 #        direct: # 直连域名列表
 #          type: http
@@ -177,12 +182,12 @@ parsers: # array
           path: ./ruleset/private.yaml
           interval: 86400
           
-        gfw: # GFWList 域名列表
-          type: http
-          behavior: domain
-          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
-          path: ./ruleset/gfw.yaml
-          interval: 86400
+#        gfw: # GFWList 域名列表
+#          type: http
+#          behavior: domain
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+#          path: ./ruleset/gfw.yaml
+#          interval: 86400
         
         us_only: # 非中国大陆使用的顶级域名列表
           type: http
@@ -192,12 +197,12 @@ parsers: # array
           path: ./ruleset/my_us.yaml
           interval: 86400
           
-        telegramcidr: # Telegram 使用的 IP 地址列表
-          type: http
-          behavior: ipcidr
-          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
-          path: ./ruleset/telegramcidr.yaml
-          interval: 86400
+#        telegramcidr: # Telegram 使用的 IP 地址列表
+#          type: http
+#          behavior: ipcidr
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/telegramcidr.txt"
+#          path: ./ruleset/telegramcidr.yaml
+#          interval: 86400
           
 #        cncidr: # 中国大陆 IP 地址列表
 #          type: http
@@ -206,12 +211,12 @@ parsers: # array
 #          path: ./ruleset/cncidr.yaml
 #          interval: 86400
           
-        lancidr: # 局域网 IP 及保留 IP 地址列表
-          type: http
-          behavior: ipcidr
-          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
-          path: ./ruleset/lancidr.yaml
-          interval: 86400
+#        lancidr: # 局域网 IP 及保留 IP 地址列表
+#          type: http
+#          behavior: ipcidr
+#          url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+#          path: ./ruleset/lancidr.yaml
+#          interval: 86400
           
 #        applications: # 需要直连的常见软件列表
 #          type: http
