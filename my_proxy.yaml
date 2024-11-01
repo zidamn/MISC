@@ -6,6 +6,7 @@ payload:
   - '+.community.akamai.steamstatic.com'
   - '+.open.spotify.com'
   - '+.apple-mapkit.com'
+  - '+.tv.apple.com'
   - '+.podcasts.apple.com'
   - '+.twitch.tv'
   - '+.geetest.com'
