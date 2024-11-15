@@ -1,5 +1,6 @@
 payload:
   - DOMAIN-SUFFIX,bestbuy.com
+  - DOMAIN-SUFFIX,costco.com
   - DOMAIN-SUFFIX,homedepot.com
   - DOMAIN-SUFFIX,synchrony.com
   
