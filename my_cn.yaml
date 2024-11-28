@@ -23,6 +23,7 @@ payload:
   - '+.neimanmarcus.com'
   - '+.chase.com'
 #Steam
+  - '+.steampowered.com'
   - '+.steamcontent.com'
   - '+.steamstatic.com'
   - '+.cm.steampowered.com'
