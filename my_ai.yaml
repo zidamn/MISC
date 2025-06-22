@@ -3,6 +3,7 @@ payload:
   - DOMAIN-SUFFIX,costco.com
   - DOMAIN-SUFFIX,homedepot.com
   - DOMAIN-SUFFIX,synchrony.com
+  - DOMAIN-SUFFIX,dazn.com
   
   - DOMAIN-SUFFIX,coze.com
   - DOMAIN-SUFFIX,bing.com
