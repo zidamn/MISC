@@ -23,7 +23,7 @@ payload:
   #- '+.pqrst.vip' #online movie
   - '+.neimanmarcus.com'
   - '+.chase.com'
-  - '+.zoom.us'
+  #- '+.zoom.us'
   
 #Steam
   - '+.steamcontent.com'
