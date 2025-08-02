@@ -27,6 +27,8 @@ payload:
   - '+.jd.com'
   - '+.taobao.com'
   - '+.163.com'
+  - '+.360buyimg.com'
+  
   
 #Steam
   - '+.steamcontent.com'
