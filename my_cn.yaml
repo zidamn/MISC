@@ -24,6 +24,9 @@ payload:
   - '+.neimanmarcus.com'
   - '+.chase.com'
   #- '+.zoom.us'
+  - '+.jd.com'
+  - '+.taobao.com'
+  - '+.163.com'
   
 #Steam
   - '+.steamcontent.com'
