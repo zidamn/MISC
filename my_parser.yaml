@@ -44,10 +44,10 @@ parsers: # array
 #          url: http://www.gstatic.com/generate_204
 #          interval: 600
          
-        - name: Stable
-          type: url-test
-          url: http://www.google.com/generate_204
-          interval: 300
+#        - name: Stable
+#          type: url-test
+#          url: http://www.google.com/generate_204
+#          interval: 300
 
         - name: 日本
           type: url-test
@@ -82,7 +82,7 @@ parsers: # array
 #        - proxy-groups.(LOAD-BALANCE).proxies=[]proxyNames
         - proxy-groups.(SELECT).proxies=[]proxyNames|^(?!.*x12\.8)(?!.*UID)(?!.*EMAIL).*$
 #        - proxy-groups.(No-HK).proxies=[]proxyNames|^(?!.*香港)(?!.*🇭🇰)(?!.*HK)(?!.*Hong Kong)(?!.*x12\.8)(?!.*x5\.88)(?!.*UID)(?!.*EMAIL).*$
-        - proxy-groups.Stable.proxies=[]proxyNames|x12.8
+#        - proxy-groups.Stable.proxies=[]proxyNames|x12.8
         - proxy-groups.日本.proxies=[]proxyNames|日|日本|🇯🇵|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan
 #        - proxy-groups.新加坡.proxies=[]proxyNames|新加坡|🇸🇬|坡|狮城|SG|Singapore
         - proxy-groups.美国.proxies=[]proxyNames|美|美国|🇺🇸|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States
@@ -152,6 +152,13 @@ parsers: # array
           behavior: domain
           url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
           path: ./ruleset/reject.yaml
+          interval: 86400
+          
+        my_rej:
+          type: http
+          behavior: domain
+          url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_rej.yaml"
+          path: ./ruleset/my_rej.yaml
           interval: 86400
           
 #        icloud: # iCloud 域名列表
