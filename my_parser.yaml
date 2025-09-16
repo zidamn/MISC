@@ -108,12 +108,13 @@ parsers: # array
    #     - DOMAIN-SUFFIX,open.spotify.com,PROXY
    #     - PROCESS-NAME,IDMan.exe,DIRECT
    #     - PROCESS-NAME,Diablo IV.exe,Stable
+        - RULE-SET,reject,AD
+        - RULE-SET,my_rej,AD
         - RULE-SET,my_proxy,PROXY
         - RULE-SET,my_cn,DIRECT
         - RULE-SET,my_ai,🤖OpenAI
         - RULE-SET,us_only,美国
         - RULE-SET,private,DIRECT
-        - RULE-SET,reject,AD
 #        - RULE-SET,icloud,DIRECT #
 #        - RULE-SET,gfw,PROXY
 #        - RULE-SET,telegramcidr,PROXY
@@ -160,7 +161,7 @@ parsers: # array
           url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_rej.yaml"
           path: ./ruleset/my_rej.yaml
           interval: 86400
-          
+
 #        icloud: # iCloud 域名列表
 #          type: http
 #          behavior: domain
