@@ -17,7 +17,7 @@ payload:
   - DOMAIN-SUFFIX,opus.pro
   - DOMAIN-SUFFIX,gemini.google.com
   - DOMAIN-SUFFIX,meta.ai
-  - DOMAIN-SUFFIX,deepseek.com
+# - DOMAIN-SUFFIX,deepseek.com
   
 # REPO: https://github.com/blackmatrix7/ios_rule_script
   - DOMAIN,browser-intake-datadoghq.com
@@ -45,3 +45,4 @@ payload:
   - DOMAIN-SUFFIX,stripe.com
   - DOMAIN-SUFFIX,turn.livekit.cloud
   - DOMAIN-KEYWORD,openai
+
