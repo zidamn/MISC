@@ -25,6 +25,8 @@ payload:
   - '+.chase.com'
   - '+.chasecdn.com'
   #- '+.zoom.us'
+  - '+.picflow.com'
+  
   
 #Steam
   - '+.steamcontent.com'
