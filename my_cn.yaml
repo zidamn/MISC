@@ -26,8 +26,8 @@ payload:
   - '+.chasecdn.com'
   #- '+.zoom.us'
   - '+.picflow.com'
-  
-  
+  - '+.battle.net' 
+  - '+.blizzard.com'
 #Steam
   - '+.steamcontent.com'
   - '+.steamstatic.com'
