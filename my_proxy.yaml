@@ -11,3 +11,22 @@ payload:
   - '+.twitch.tv'
   - '+.geetest.com'
   - '+.gfw.report'
+#google map  
+# 1. Main Consumer & Platform Domains
+ - '+.maps.google.com' # The primary global domain for the consumer web application.
+# 2. Google Maps Platform API Endpoints
+# (Note: These are all subdomains of googleapis.com)
+ - '+.maps.googleapis.com' # Main endpoint for most Maps Platform APIs.
+ - '+.routes.googleapis.com' # Endpoint for the newer Routes API.
+ - '+.tile.googleapis.com' # Endpoint for the Map Tiles API.
+ - '+.places.googleapis.com' # Endpoint for all Places API services.
+ - '+.addressvalidation.googleapis.com' # API endpoint for validating street addresses.
+# 3. Map & Satellite Tile Servers
+ - '+.khm.google.com' # Base domain for "Keyhole" satellite tiles. (Matches khm0, khm1, etc.)
+ - '+.mt.google.com' # Base domain for standard "Map Tiles". (Matches mt0, mt1, etc.)
+# 4. Static Content & Client Services
+ - '+.maps.gstatic.com' # Hosts static assets: icons, images, JS libraries.
+ - '+.fonts.gstatic.com' # Hosts fonts used on Google Maps.
+ - '+.clients4.google.com' # General-purpose domain for Google mobile clients.
+# 5. Other Related Services
+ - '+.google-maps-pro.appspot.com' # Used for some premium or professional-tier services.
