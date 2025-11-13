@@ -1,32 +1,42 @@
 payload:
-  - '+.gigabyte.com'
-  - '+.agoda.com'
- # - '+.klook.com'
-  - '+.gvt1-cn.com'
-  - '+.community.akamai.steamstatic.com'
-  - '+.open.spotify.com'
+# ------------------------------------
+# Google Services
+# ------------------------------------
+  - '+.googleapis.com' # CATCH-ALL: Replaces 8 separate entries (maps, routes, gmail, apis, etc.)
+  - '+.gstatic.com' # CATCH-ALL: Replaces 3 separate entries (maps, fonts, general)
+  - '+.googleusercontent.com' # CATCH-ALL: Replaces 3 entries & fixes invalid syntax
+  - '+.gmail.com'
+  - '+.googlemail.com'
+  - '+.gvt1-cn.com' # Google Video/Download server
+  - '+.clients4.google.com'
+  - '+.google-maps-pro.appspot.com'
+
+# Google.com Subdomains
+  - '+.khm.google.com' # Map tiles
+  - '+.mt.google.com' # Map tiles
+  - '+.mail.google.com'
+  - '+.accounts.google.com'
+  - '+.client-channel.google.com'
+  - '+.chat.google.com'
+  - '+.meet.google.com'
+  - '+.contacts.google.com'
+  - '+.calendar.google.com'
+  - '+.play.google.com'
+  - '+.mail-attachment.google.com'
+
+# ------------------------------------
+# Apple Services
+# ------------------------------------
   - '+.apple-mapkit.com'
   - '+.tv.apple.com'
   - '+.podcasts.apple.com'
+
+# ------------------------------------
+# Other Third-Party Services
+# ------------------------------------
+  - '+.gigabyte.com'
+  - '+.agoda.com'
+  - '+.community.akamai.steamstatic.com'
   - '+.twitch.tv'
-  - '+.geetest.com'
+  - '+.geetest.com' # CAPTCHA service
   - '+.gfw.report'
-#google map  
-# 1. Main Consumer & Platform Domains
- - '+.maps.google.com' # The primary global domain for the consumer web application.
-# 2. Google Maps Platform API Endpoints
-# (Note: These are all subdomains of googleapis.com)
- - '+.maps.googleapis.com' # Main endpoint for most Maps Platform APIs.
- - '+.routes.googleapis.com' # Endpoint for the newer Routes API.
- - '+.tile.googleapis.com' # Endpoint for the Map Tiles API.
- - '+.places.googleapis.com' # Endpoint for all Places API services.
- - '+.addressvalidation.googleapis.com' # API endpoint for validating street addresses.
-# 3. Map & Satellite Tile Servers
- - '+.khm.google.com' # Base domain for "Keyhole" satellite tiles. (Matches khm0, khm1, etc.)
- - '+.mt.google.com' # Base domain for standard "Map Tiles". (Matches mt0, mt1, etc.)
-# 4. Static Content & Client Services
- - '+.maps.gstatic.com' # Hosts static assets: icons, images, JS libraries.
- - '+.fonts.gstatic.com' # Hosts fonts used on Google Maps.
- - '+.clients4.google.com' # General-purpose domain for Google mobile clients.
-# 5. Other Related Services
- - '+.google-maps-pro.appspot.com' # Used for some premium or professional-tier services.
