@@ -1,8 +1,6 @@
 payload:
   - '+.gov'
   - '+.mil'
-#  - '+.google.com'
-#  - '+.googleapis.com'
   - '+.usvisascheduling.com'
   - '+.lowes.com'
   - '+.bjs.com'
@@ -10,3 +8,8 @@ payload:
   - '+.progressive.com'
   - '+.progressivedirect.com'
   - '+.waltersmanagement.com'
+  - '+.bestbuy.com'
+  - '+.costco.com'
+  - '+.homedepot.com'
+  - '+.synchrony.com'
+  - '+.dazn.com'
