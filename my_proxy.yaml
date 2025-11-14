@@ -40,5 +40,3 @@ payload:
   - '+.twitch.tv'
   - '+.geetest.com' # CAPTCHA service
   - '+.gfw.report'
-  - '+.browserleaks.com'
-  - '+.browserleaks.org'
