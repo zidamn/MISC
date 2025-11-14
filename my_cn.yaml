@@ -28,7 +28,7 @@ payload:
   - '+.picflow.com'
   - '+.battle.net' 
   - '+.blizzard.com'
-  - '+.msftconnecttest.com' #windows phone connect OPPO needs cn route
+  - '+.release-assets.githubusercontent.com'
   
 #Steam
   - '+.steamcontent.com'
