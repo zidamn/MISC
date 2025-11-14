@@ -1,14 +1,9 @@
-payload:
-  - DOMAIN-SUFFIX,bestbuy.com
-  - DOMAIN-SUFFIX,costco.com
-  - DOMAIN-SUFFIX,homedepot.com
-  - DOMAIN-SUFFIX,synchrony.com
-  - DOMAIN-SUFFIX,dazn.com
-  
+payload: 
   - DOMAIN-SUFFIX,coze.com
   - DOMAIN-SUFFIX,bing.com
   - DOMAIN-SUFFIX,anthropic.com
   - DOMAIN-SUFFIX,claude.ai
+  - DOMAIN-SUFFIX,claude.com  
   - DOMAIN-SUFFIX,azure.com
   - DOMAIN-SUFFIX,google.dev
   - DOMAIN-SUFFIX,google.com
@@ -45,4 +40,3 @@ payload:
   - DOMAIN-SUFFIX,stripe.com
   - DOMAIN-SUFFIX,turn.livekit.cloud
   - DOMAIN-KEYWORD,openai
-
