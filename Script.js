@@ -1,51 +1,3 @@
-// 国内DNS服务器
-const domesticNameservers = [
-  "https://dns.alidns.com/dns-query",
-  "https://doh.pub/dns-query",
-  "https://doh.360.cn/dns-query"
-];
-
-// 国外DNS服务器
-const foreignNameservers = [
-  "https://1.1.1.1/dns-query", // Cloudflare(主)
-  "https://1.0.0.1/dns-query", // Cloudflare(备)
-  "https://208.67.222.222/dns-query", // OpenDNS(主)
-  "https://208.67.220.220/dns-query", // OpenDNS(备)
-  "https://194.242.2.2/dns-query", // Mullvad(主)
-  "https://194.242.2.3/dns-query" // Mullvad(备)
-];
-
-// DNS配置
-const dnsConfig = {
-  "enable": true,
-  "listen": "0.0.0.0:1053",
-  "ipv6": true,
-  "use-system-hosts": false,
-  "cache-algorithm": "arc",
-  "enhanced-mode": "fake-ip",
-  "fake-ip-range": "198.18.0.1/16",
-  "fake-ip-filter": [
-    // 本地主机/设备
-    "+.lan",
-    "+.local",
-    // Windows网络出现小地球图标
-    "+.msftconnecttest.com",
-    "+.msftncsi.com",
-    // QQ快速登录检测失败
-    "localhost.ptlogin2.qq.com",
-    "localhost.sec.qq.com",
-    // 微信快速登录检测失败
-    "localhost.work.weixin.qq.com"
-  ],
-  "default-nameserver": ["223.5.5.5", "119.29.29.29", "1.1.1.1", "8.8.8.8"],
-  "nameserver": [...domesticNameservers, ...foreignNameservers],
-  "proxy-server-nameserver": [...domesticNameservers, ...foreignNameservers],
-  "nameserver-policy": {
-    "geosite:private,cn,geolocation-cn": domesticNameservers,
-    "geosite:google,youtube,telegram,gfw,geolocation-!cn": foreignNameservers
-  }
-};
-
 // 规则集通用配置
 const ruleProviderCommon = {
   type: "http",
@@ -90,13 +42,13 @@ const ruleProviders = {
     ...ruleProviderCommon,
     "behavior": "ipcidr",
     "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt",
-    "path": "./ruleset/loyalsoldier/cncidr.yaml"
+    "path": "./ruleset/cncidr.yaml"
   },
   "lancidr": {
     ...ruleProviderCommon,
     "behavior": "ipcidr",
     "url": "https://fastly.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt",
-    "path": "./ruleset/loyalsoldier/lancidr.yaml"
+    "path": "./ruleset/lancidr.yaml"
   },
   private: {
     ...ruleProviderCommon,
@@ -107,8 +59,8 @@ const ruleProviders = {
 
 // 规则
 const rules = [
-  "RULE-SET,reject,AD",
-  "RULE-SET,my_rej,AD",
+  "RULE-SET,reject,REJECT",
+  "RULE-SET,my_rej,REJECT",
   "RULE-SET,my_proxy,PROXY",
   "RULE-SET,my_cn,DIRECT",
   "RULE-SET,my_ai,AI",
@@ -116,14 +68,19 @@ const rules = [
   "RULE-SET,private,DIRECT",
   "RULE-SET,lancidr,DIRECT,no-resolve",
   "RULE-SET,cncidr,DIRECT,no-resolve",
-  "GEOIP,CN,DIRECT,no-resolve",
+  "GEOSITE,category-ads-all,REJECT",
+  "GEOSITE,private,DIRECT",
+  "GEOSITE,steam@cn,DIRECT",
+//  "GEOSITE,geolocation-!cn,PROXY",
+  "GEOSITE,cn,DIRECT",
+  "GEOIP,CN,DIRECT",
   "MATCH,OTHER"
 ];
 
 // 代理组通用配置
 const groupBaseOption = {
   interval: 300,
-  url: "http://www.google.com/generate_204",
+  url: "https://www.google.com/generate_204",
   "lazy": true,
   "max-failed-times": 3,
   "hidden": false
@@ -139,11 +96,8 @@ function main(config) {
     throw new Error("配置文件中未找到任何代理");
   }
 
-  // 设置混合端口
-  config["mixed-port"] = 7890;
-
   // 覆盖DNS配置
-  config.dns = dnsConfig;
+//  config.dns = dnsConfig;
 
   // 获取所有代理节点名称
   const proxyNames = config?.proxies?.map(p => p.name) ?? [];
@@ -153,7 +107,6 @@ function main(config) {
   const selectFilter = /^(?!.*x12\.8)(?!.*UID)(?!.*EMAIL).*$/;
   const japanFilter = /日|日本|🇯🇵|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan/;
   const usFilter = /美|美国|🇺🇸|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States/;
-
   const urlTestProxies = proxyNames.filter(name => urlTestFilter.test(name));
   const selectProxies = proxyNames.filter(name => selectFilter.test(name));
   const japanProxies = proxyNames.filter(name => japanFilter.test(name));
@@ -170,11 +123,6 @@ function main(config) {
       name: "OTHER",
       type: "select",
       proxies: ["PROXY", "DIRECT"]
-    },
-    {
-      name: "AD",
-      type: "select",
-      proxies: ["REJECT", "DIRECT", "PROXY"]
     },
     {
       ...groupBaseOption,
