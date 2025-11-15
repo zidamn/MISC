@@ -41,5 +41,4 @@ payload:
   - '+.geetest.com' # CAPTCHA service
   - '+.gfw.report'
   - '+.browserleaks.com'
-  - '+.dns.alidns.com'
-  - '+.doh.pub'
+
