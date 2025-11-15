@@ -29,6 +29,8 @@ payload:
   - '+.battle.net' 
   - '+.blizzard.com'
   - '+.release-assets.githubusercontent.com'
+  - '+.dns.alidns.com'
+  - '+.doh.pub'
   
 #Steam
   # - '+.steamcontent.com'
