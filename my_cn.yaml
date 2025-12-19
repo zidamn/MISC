@@ -18,9 +18,7 @@ payload:
   - '+.xiamenair.com'
   - '+.docker.com'
   - '+.dlr1.fcdn.sk' #net disk
-  #- '+.v.ddys.pro'
   - '+.saraba1st.com'
-  #- '+.pqrst.vip' #online movie
   - '+.neimanmarcus.com'
   - '+.chase.com'
   - '+.chasecdn.com'
@@ -28,7 +26,7 @@ payload:
   - '+.picflow.com'
   - '+.battle.net' 
   - '+.blizzard.com'
-  - '+.release-assets.githubusercontent.com'
+  #- '+.release-assets.githubusercontent.com'
   
 #Steam
   # - '+.steamcontent.com'
