@@ -71,7 +71,7 @@ const rules = [
   "GEOSITE,category-ads-all,REJECT",
   "GEOSITE,private,DIRECT",
   "GEOSITE,steam@cn,DIRECT",
-//  "GEOSITE,geolocation-!cn,PROXY",
+  "GEOSITE,geolocation-!cn,PROXY",
   "GEOSITE,cn,DIRECT",
   "GEOIP,CN,DIRECT",
   "MATCH,OTHER"
@@ -99,6 +99,25 @@ function main(config) {
   // 覆盖DNS配置
 //  config.dns = dnsConfig;
 
+  // My own server info
+  const myNewServer1 = {
+    name: "vless-reality-US",
+    type: "vless",
+    server: "69.63.222.151",
+    port: 443,
+    uuid: "06e6b7f8-3caa-46ac-c4ee-49382c993751",
+    udp: true,
+    tls: true,
+    flow: "xtls-rprx-vision",
+    servername: "www.microsoft.com",
+    "reality-opts": {
+      "public-key": "agZo13T6yqqeHFM3GqpN0qUQ16v8oS9GezxbxHjleVk",
+      "short-id": ""
+    },
+    "client-fingerprint": "safari"
+  };
+  config.proxies.push(myNewServer1);
+
   // 获取所有代理节点名称
   const proxyNames = config?.proxies?.map(p => p.name) ?? [];
 
@@ -106,7 +125,7 @@ function main(config) {
   const urlTestFilter = /^(?!.*x12\.8)(?!.*x5\.88)(?!.*UID)(?!.*EMAIL).*$/;
   const selectFilter = /^(?!.*x12\.8)(?!.*UID)(?!.*EMAIL).*$/;
   const japanFilter = /日|日本|🇯🇵|川日|东京|大阪|泉日|埼玉|沪日|深日|[^-]日|JP|Japan/;
-  const usFilter = /美|美国|🇺🇸|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States/;
+  const usFilter = /美|美国|🇺🇸|US|United States/;
   const urlTestProxies = proxyNames.filter(name => urlTestFilter.test(name));
   const selectProxies = proxyNames.filter(name => selectFilter.test(name));
   const japanProxies = proxyNames.filter(name => japanFilter.test(name));
