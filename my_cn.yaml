@@ -14,7 +14,6 @@ payload:
   - DOMAIN-SUFFIX,spotifycdn.com
   - DOMAIN-SUFFIX,shimo.im
   - DOMAIN-SUFFIX,p.sda1.dev
-  # Advanced Gofile Logic (No target specified)
   - AND,((DOMAIN-KEYWORD,file-),(DOMAIN-SUFFIX,gofile.io))
   - DOMAIN-SUFFIX,xiamenair.com
   - DOMAIN-SUFFIX,docker.com
@@ -26,3 +25,5 @@ payload:
   - DOMAIN-SUFFIX,picflow.com
   - DOMAIN-SUFFIX,battle.net
   - DOMAIN-SUFFIX,blizzard.com
+  - DOMAIN-SUFFIX,cdn.yzzy31-play.com
+  - DOMAIN-SUFFIX,mxvod.com
