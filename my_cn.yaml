@@ -10,7 +10,6 @@ payload:
   - DOMAIN-SUFFIX,cdn.blizzard.com
   - DOMAIN-SUFFIX,cloudflarestorage.com
   - DOMAIN-SUFFIX,audio-ak-spotify-com.akamaized.net
-  - DOMAIN-SUFFIX,spotify.com
   - DOMAIN-SUFFIX,spotifycdn.com
   - DOMAIN-SUFFIX,shimo.im
   - DOMAIN-SUFFIX,p.sda1.dev
@@ -19,11 +18,7 @@ payload:
   - DOMAIN-SUFFIX,docker.com
   - DOMAIN-SUFFIX,dlr1.fcdn.sk
   - DOMAIN-SUFFIX,saraba1st.com
-  - DOMAIN-SUFFIX,neimanmarcus.com
-  - DOMAIN-SUFFIX,chase.com
-  - DOMAIN-SUFFIX,chasecdn.com
   - DOMAIN-SUFFIX,picflow.com
   - DOMAIN-SUFFIX,battle.net
   - DOMAIN-SUFFIX,blizzard.com
-  - DOMAIN-SUFFIX,cdn.yzzy31-play.com
   - DOMAIN-SUFFIX,mxvod.com
