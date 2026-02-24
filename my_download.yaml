@@ -1,0 +1,5 @@
+payload:
+  - AND,((DOMAIN-KEYWORD,file-),(DOMAIN-SUFFIX,gofile.io))
+  - DOMAIN-SUFFIX,storage.live.com
+  - DOMAIN-SUFFIX,svc.ms
+  - DOMAIN-SUFFIX,cdn.blizzard.com
