@@ -27,6 +27,12 @@ const ruleProviders = {
     url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_cn.yaml",
     path: "./ruleset/my_cn.yaml"
   },
+  my_data: {
+    ...ruleProviderCommon,
+    behavior: "classical",
+    url: "https://raw.githubusercontent.com/zidamn/MISC/master/my_download.yaml",
+    path: "./ruleset/my_download.yaml"
+  }, 
   my_ai: {
     ...ruleProviderCommon,
     behavior: "classical",
@@ -62,6 +68,7 @@ const rules = [
   "RULE-SET,reject,REJECT",
   "RULE-SET,my_rej,REJECT",
   "RULE-SET,my_proxy,PROXY",
+  "RULE-SET,my_data,DATA",
   "RULE-SET,my_cn,DIRECT",
   "RULE-SET,my_ai,AI",
   "RULE-SET,us_only,美国",
@@ -150,6 +157,12 @@ function main(config) {
       tolerance: 100,
       proxies: urlTestProxies
     },
+    {
+      ...groupBaseOption,
+      name: "DATA",
+      type: "select",
+      proxies: ["DIRECT", ...selectProxies]
+    },    
     {
       ...groupBaseOption,
       name: "日本",
